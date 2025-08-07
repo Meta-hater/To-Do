@@ -1,11 +1,9 @@
 ﻿#include <iostream>
-#include <fstream>
 #include <map>
 #include <string>
 #include <functional>
 
 static size_t ID;
-std::ofstream fout;
 
 bool my_is_digit(std::string s) {
 	if (s[0] == '0') {
@@ -85,7 +83,7 @@ void print_to_do(std::map<size_t, std::pair<std::string, bool>> lst) {
 		foo(5, '\t'); std::cout << "+"; foo(mx_id_len + mx_stat_len + mx_task_name_len + 14, '-'); std::cout << "+\n";
 	}
 
-} // test passed
+} 
 // OK
 void print_main_menu(std::map<size_t, std::pair<std::string, bool>> lst) { 
 	std::function<void(size_t a, char c)> foo =
@@ -146,7 +144,7 @@ void add_task (std::map<size_t, std::pair<std::string, bool>>& lst) {
 		print_main_menu(lst);
 	}
 
-} //
+} 
 // OK
 void delete_task(std::map<size_t, std::pair<std::string, bool>>& lst) {
 	clear();
@@ -174,7 +172,6 @@ void delete_task(std::map<size_t, std::pair<std::string, bool>>& lst) {
 	while (1) {
 		std::getline(std::cin, num);
 		if (my_is_digit(num)) {
-			//break
 			old_id = std::stoi(num);
 			if (lst.find(old_id) == lst.end()) {
 				std::cout << "\t\tNo such ID in to-do, please try again!\n\t\tChoose ID of task you would like to delete: ";
@@ -205,16 +202,10 @@ void delete_task(std::map<size_t, std::pair<std::string, bool>>& lst) {
 		}
 		else {
 			break;
-		} // 1 2 3 4 5 [6(5)]
+		}
 	}
 
-	if (c == "n") {
-		/*std::pair<std::string, bool> old_pair = lst[old_id];
-		for (size_t i = lst.size(); i + 1 > old_id; --i) {
-			lst[i + 1] = lst[i];
-		}
-		lst[old_id] = old_pair;*/
-		
+	if (c == "n") {		
 		for (size_t i = lst.size(); i >= old_id; --i) {
 			lst[i + 1] = lst[i];
 		}
@@ -355,7 +346,7 @@ void change_task_status(std::map<size_t, std::pair<std::string, bool>>& lst) {
 	else {
 		lst[id].second = true;
 	}
-	//
+	
 	clear();
 	print_to_do(lst);
 	std::cout << "\t\tHere is your new to-do!\n\t\tPress <y> to save changes and <n> to reset changes: ";
@@ -408,4 +399,5 @@ int main() {
 		}
 	}
 	return 0;
+
 }
